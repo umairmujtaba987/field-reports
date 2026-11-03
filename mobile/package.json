@@ -11,7 +11,7 @@
     "test:headless": "npx tsx src/core/queue/__tests__/headlessQueue.test.ts"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^3.1.1",
+    "@react-native-async-storage/async-storage": "1.24.0",
     "@react-native-community/netinfo": "^12.0.1",
     "react": "18.3.1",
     "react-native": "0.76.7",
