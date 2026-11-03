@@ -16,7 +16,6 @@
     "react": "18.3.1",
     "react-native": "0.76.7",
     "react-native-image-picker": "^8.3.0",
-    "react-native-image-resizer": "^1.4.5",
     "uuid": "^14.0.3"
   },
   "devDependencies": {
