@@ -1,11 +1,16 @@
 # Node
 node_modules/
+**/node_modules/
 npm-debug.log
 yarn-error.log
 
 # Build
 dist/
 build/
+android/app/build/
+android/.gradle/
+ios/build/
+ios/Pods/
 
 # Runtime Data
 backend/data/*.json

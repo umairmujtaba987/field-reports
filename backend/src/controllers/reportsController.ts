@@ -105,3 +105,4 @@ export const resetReports = (_req: Request, res: Response) => {
     message: 'Start over executed: All reports and uploaded images have been wiped.',
   });
 };
+

@@ -10,3 +10,4 @@ router.post('/reports', uploadMiddleware, createReport);
 router.post('/reset', resetReports);
 
 export default router;
+

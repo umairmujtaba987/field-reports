@@ -33,3 +33,4 @@ export const updateChaos = (req: Request, res: Response) => {
     chaosConfig,
   });
 };
+

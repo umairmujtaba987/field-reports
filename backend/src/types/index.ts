@@ -24,3 +24,4 @@ export interface ChaosConfig {
   hangRate: number;    // 0.0 to 1.0
   errorCode: number;   // HTTP status code to return on error, e.g. 500 or 503
 }
+
