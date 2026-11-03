@@ -11,8 +11,9 @@ export class Store {
   private clientIndex: Map<string, string> = new Map(); // clientReportId -> server report id
 
   constructor() {
-    this.dataDir = path.resolve(process.cwd(), 'data');
-    this.uploadsDir = path.resolve(process.cwd(), 'uploads');
+    const baseDir = process.env.VERCEL ? '/tmp' : process.cwd();
+    this.dataDir = path.resolve(baseDir, 'data');
+    this.uploadsDir = path.resolve(baseDir, 'uploads');
     this.filePath = path.join(this.dataDir, 'reports.json');
 
     this.ensureDirs();

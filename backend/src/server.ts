@@ -15,7 +15,9 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const HOST = '0.0.0.0';
 
 // Ensure uploads directory exists
-const UPLOADS_DIR = path.resolve(process.cwd(), 'uploads');
+const UPLOADS_DIR = process.env.VERCEL
+  ? path.resolve('/tmp', 'uploads')
+  : path.resolve(process.cwd(), 'uploads');
 if (!fs.existsSync(UPLOADS_DIR)) {
   fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 }
@@ -62,15 +64,17 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   });
 });
 
-// Start Server
-const server = app.listen(PORT, HOST, () => {
-  console.log(`=================================================`);
-  console.log(` Field Reports Backend running on http://${HOST}:${PORT}`);
-  console.log(` Local access: http://localhost:${PORT}`);
-  console.log(` Android Emulator access: http://10.0.2.2:${PORT}`);
-  console.log(` Uploads served at: http://${HOST}:${PORT}/uploads`);
-  console.log(`=================================================`);
-});
+// Start Server (only listen if executed directly, not when required in test or on Vercel)
+if (require.main === module && !process.env.VERCEL) {
+  app.listen(PORT, HOST, () => {
+    console.log(`=================================================`);
+    console.log(` Field Reports Backend running on http://${HOST}:${PORT}`);
+    console.log(` Local access: http://localhost:${PORT}`);
+    console.log(` Android Emulator access: http://10.0.2.2:${PORT}`);
+    console.log(` Uploads served at: http://${HOST}:${PORT}/uploads`);
+    console.log(`=================================================`);
+  });
+}
 
 export default app;
 
