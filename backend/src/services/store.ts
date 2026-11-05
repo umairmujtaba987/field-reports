@@ -91,6 +91,32 @@ export class Store {
     return report;
   }
 
+  public delete(id: string): Report | undefined {
+    const report = this.reports.get(id);
+    if (!report) return undefined;
+
+    // Delete image files associated with this report
+    for (const img of report.images) {
+      if (img.filename) {
+        const filePath = path.join(this.uploadsDir, img.filename);
+        if (fs.existsSync(filePath)) {
+          try {
+            fs.unlinkSync(filePath);
+          } catch (e) {
+            console.error(`[STORE] Failed to delete image ${img.filename}:`, e);
+          }
+        }
+      }
+    }
+
+    this.reports.delete(id);
+    if (report.clientReportId) {
+      this.clientIndex.delete(report.clientReportId);
+    }
+    this.persist();
+    return report;
+  }
+
   public reset(): void {
     this.reports.clear();
     this.clientIndex.clear();

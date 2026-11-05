@@ -40,7 +40,7 @@ app.get('/', (_req: Request, res: Response) => {
     status: 'online',
     service: 'Field Reports Backend API',
     endpoints: {
-      reports: 'GET /api/reports, POST /api/reports, GET /api/reports/:id',
+      reports: 'GET /api/reports, POST /api/reports, GET /api/reports/:id, DELETE /api/reports/:id',
       reset: 'POST /api/reset',
       chaosConfig: 'GET /api/chaos, POST /api/chaos',
     },

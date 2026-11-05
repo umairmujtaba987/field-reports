@@ -98,6 +98,22 @@ export const createReport = (req: Request, res: Response) => {
   return res.status(201).json(newReport);
 };
 
+export const deleteReport = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const deleted = store.delete(id);
+
+  if (!deleted) {
+    return res.status(404).json({ error: `Report with ID ${id} not found.` });
+  }
+
+  console.log(`[REPORT DELETED] ID: ${id}`);
+  return res.json({
+    success: true,
+    message: `Report with ID ${id} deleted successfully.`,
+    id,
+  });
+};
+
 export const resetReports = (_req: Request, res: Response) => {
   store.reset();
   return res.json({
