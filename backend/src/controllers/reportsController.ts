@@ -77,7 +77,13 @@ export const createReport = (req: Request, res: Response) => {
 
   // 5. Construct Image Objects
   const host = req.get('host') || 'localhost:3000';
-  const protocol = req.protocol;
+  const forwardedProto = req.headers['x-forwarded-proto'];
+  const protocol =
+    typeof forwardedProto === 'string'
+      ? forwardedProto
+      : host.includes('vercel.app') || req.secure
+      ? 'https'
+      : req.protocol || 'http';
   const images: ReportImage[] = files.map((file, idx) => ({
     id: `${clientReportId}-img-${idx + 1}`,
     filename: file.filename,
